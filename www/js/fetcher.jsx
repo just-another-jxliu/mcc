@@ -15,12 +15,13 @@
       e.preventDefault()
 
       var url = React.findDOMNode(this.refs.urlToFetch).value
+      var delay = React.findDOMNode(this.refs.delay).value
       var submitContext = this
 
       if (url) {
         $.get(
           "request",
-          { url: url },
+          { url: url, delay: delay },
           function(data) {
             if (!isNaN(data)) {
               React.findDOMNode(submitContext.refs.jobId).innerText = "Job ID: " + data
@@ -37,6 +38,7 @@
           <form className="form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input type="text" className="form-control" ref="urlToFetch"placeholder="URL to fetch"></input>
+              <input type="text" className="form-control" ref="delay"placeholder="Delay (ms)"></input>
               <button type="submit" className="btn btn-primary">Start Job</button>
             </div>
 
